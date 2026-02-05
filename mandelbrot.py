@@ -1,5 +1,18 @@
+import time
+
 import numpy as np
 import matplotlib.pyplot as plt
+
+from decorator import decorator
+
+
+@decorator
+def timeit(func, *args, **kw):
+    t0 = time.time()
+    result = func(*args, **kw)
+    dt = time.time() - t0
+    print(f"{func} took {dt} sec")
+    return result
 
 
 def count_iterations(c, max_iter):
@@ -18,6 +31,7 @@ def count_iterations(c, max_iter):
     return max_iter
 
 
+@timeit
 def mandelbrot_calc(x_min, x_max, y_min, y_max, width, height, max_iter):
     """ Calculate mandelbrot image.
 

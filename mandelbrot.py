@@ -58,5 +58,5 @@ def show(data):
 
 
 if __name__ == "__main__":
-    mandelbrot = mandelbrot_calc(-0.22, -0.219, -0.70, -0.699, 1000, 1000, 120)
+    mandelbrot = mandelbrot_calc(-2, 1, -1.5, 1.5, 1000, 1000, 120)
     show(mandelbrot)

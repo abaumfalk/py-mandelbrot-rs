@@ -18,8 +18,8 @@ def count_iterations(c, max_iter):
     return max_iter
 
 
-def mandelbrot(x_min, x_max, y_min, y_max, width, height, max_iter):
-    """ Draw mandelbrot image.
+def mandelbrot_calc(x_min, x_max, y_min, y_max, width, height, max_iter):
+    """ Calculate mandelbrot image.
 
     :param x_min: minimum x-coordinate
     :param x_max: maximum x-coordinate
@@ -45,10 +45,18 @@ def mandelbrot(x_min, x_max, y_min, y_max, width, height, max_iter):
 
             atlas[ix, iy] = count_iterations(c, max_iter)
 
-    # plot and display mandelbrot set
-    plt.imshow(atlas.T, interpolation="nearest")
+    return atlas
+
+
+def show(data):
+    """ plot and display precalculated data
+
+    :param data: data to be plotted
+    """
+    plt.imshow(data.T, interpolation="nearest")
     plt.show()
 
 
 if __name__ == "__main__":
-    mandelbrot(-0.22, -0.219, -0.70, -0.699, 1000, 1000, 120)
+    mandelbrot = mandelbrot_calc(-0.22, -0.219, -0.70, -0.699, 1000, 1000, 120)
+    show(mandelbrot)

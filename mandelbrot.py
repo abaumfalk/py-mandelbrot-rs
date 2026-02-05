@@ -53,7 +53,7 @@ def show(data):
 
     :param data: data to be plotted
     """
-    plt.imshow(data.T, interpolation="nearest")
+    plt.imshow(data.T, cmap="hot")
     plt.show()
 
 

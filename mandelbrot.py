@@ -47,19 +47,11 @@ def mandelbrot_calc(x_min, x_max, y_min, y_max, width, height, max_iter):
     real_axis = np.linspace(x_min, x_max, width)
     imaginary_axis = np.linspace(y_min, y_max, height)
 
-    # 2-D array to represent mandelbrot atlas
-    atlas = np.empty((height, width))
-
     # color each point in the atlas depending on the iteration count
-    for ix in range(height):
-        for iy in range(width):
-            cx = real_axis[ix]
-            cy = imaginary_axis[iy]
-            c = complex(cx, cy)
-
-            atlas[ix, iy] = count_iterations(c, max_iter)
-
-    return atlas
+    return np.array(
+        [[count_iterations(complex(real_axis[ix], imaginary_axis[iy]), max_iter)
+          for ix in range(height)] for iy in range(width)]
+    )
 
 
 def show(data):
@@ -67,7 +59,7 @@ def show(data):
 
     :param data: data to be plotted
     """
-    plt.imshow(data.T, cmap="hot")
+    plt.imshow(data, cmap="hot")
     plt.show()
 
 

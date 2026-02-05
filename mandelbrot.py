@@ -32,15 +32,13 @@ def mandelbrot(x_min, x_max, y_min, y_max, width, height, max_iter):
     # location and size of the atlas rectangle
     real_axis = np.linspace(x_min, x_max, width)
     imaginary_axis = np.linspace(y_min, y_max, height)
-    real_axis_len = len(real_axis)
-    imaginary_axis_len = len(imaginary_axis)
 
     # 2-D array to represent mandelbrot atlas
-    atlas = np.empty((real_axis_len, imaginary_axis_len))
+    atlas = np.empty((height, width))
 
     # color each point in the atlas depending on the iteration count
-    for ix in range(real_axis_len):
-        for iy in range(imaginary_axis_len):
+    for ix in range(height):
+        for iy in range(width):
             cx = real_axis[ix]
             cy = imaginary_axis[iy]
             c = complex(cx, cy)

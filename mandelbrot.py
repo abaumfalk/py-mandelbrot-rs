@@ -18,15 +18,20 @@ def count_iterations(c, max_iter):
     return max_iter
 
 
-def mandelbrot(max_iter, number):
+def mandelbrot(x_min, x_max, y_min, y_max, width, height, max_iter):
     """ Draw mandelbrot image.
 
+    :param x_min: minimum x-coordinate
+    :param x_max: maximum x-coordinate
+    :param y_min: minimum y-coordinate
+    :param y_max: maximum y-coordinate
+    :param width: width of image
+    :param height: height of image
     :param max_iter: iteration limit
-    :param number: number of samples
     """
     # location and size of the atlas rectangle
-    real_axis = np.linspace(-0.22, -0.219, number)
-    imaginary_axis = np.linspace(-0.70, -0.699, number)
+    real_axis = np.linspace(x_min, x_max, width)
+    imaginary_axis = np.linspace(y_min, y_max, height)
     real_axis_len = len(real_axis)
     imaginary_axis_len = len(imaginary_axis)
 
@@ -48,4 +53,4 @@ def mandelbrot(max_iter, number):
 
 
 if __name__ == "__main__":
-    mandelbrot(120, 1000)
+    mandelbrot(-0.22, -0.219, -0.70, -0.699, 1000, 1000, 120)

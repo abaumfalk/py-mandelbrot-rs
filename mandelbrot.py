@@ -12,7 +12,7 @@ def count_iterations(c, max_iter):
     z = complex(0, 0)
     for iteration in range(max_iter):
         z = (z*z) + c
-        if abs(z) > 4:
+        if abs(z) > 2:
             return iteration
 
     return max_iter

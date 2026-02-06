@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from decorator import decorator
-from py_mandelbrot_rs import count_iterations
+from py_mandelbrot_rs import count_iterations, mandelbrot_calc_rs
 
 @decorator
 def timeit(func, *args, **kw):
@@ -27,24 +27,7 @@ def mandelbrot_calc(x_min, x_max, y_min, y_max, width, height, max_iter):
     :param height: height of image
     :param max_iter: iteration limit
     """
-    # location and size of the atlas rectangle
-    real_axis = np.linspace(x_min, x_max, width)
-    imaginary_axis = np.linspace(y_min, y_max, height)
-
-    # 2-D array to represent mandelbrot atlas
-    atlas = np.empty((height, width))
-
-    # color each point in the atlas depending on the iteration count
-    for iy in range(height):
-        for ix in range(width):
-            cx = real_axis[ix]
-            cy = imaginary_axis[iy]
-
-            c = complex(cx, cy)
-
-            atlas[iy, ix] = count_iterations(cx, cy, max_iter)
-
-    return atlas
+    return mandelbrot_calc_rs(x_min, x_max, y_min, y_max, width, height, max_iter)
 
 
 def show(data):

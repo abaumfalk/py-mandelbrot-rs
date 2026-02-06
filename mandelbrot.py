@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from decorator import decorator
-
+from py_mandelbrot_rs import count_iterations
 
 @decorator
 def timeit(func, *args, **kw):
@@ -13,22 +13,6 @@ def timeit(func, *args, **kw):
     dt = time.time() - t0
     print(f"{func} took {dt} sec")
     return result
-
-
-def count_iterations(c, max_iter):
-    """ Counts the number of iterations until the function diverges or max_iter is reached.
-
-    :param c: coordinate
-    :param max_iter: interation limit
-    :return: number of iterations
-    """
-    z = complex(0, 0)
-    for iteration in range(max_iter):
-        z = (z*z) + c
-        if abs(z) > 2:
-            return iteration
-
-    return max_iter
 
 
 @timeit
@@ -55,9 +39,10 @@ def mandelbrot_calc(x_min, x_max, y_min, y_max, width, height, max_iter):
         for ix in range(width):
             cx = real_axis[ix]
             cy = imaginary_axis[iy]
+
             c = complex(cx, cy)
 
-            atlas[iy, ix] = count_iterations(c, max_iter)
+            atlas[iy, ix] = count_iterations(cx, cy, max_iter)
 
     return atlas
 
@@ -74,3 +59,4 @@ def show(data):
 if __name__ == "__main__":
     mandelbrot = mandelbrot_calc(-2, 1, -1.5, 1.5, 1000, 1000, 120)
     show(mandelbrot)
+

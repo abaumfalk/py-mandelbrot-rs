@@ -1,4 +1,6 @@
 import argparse
+import time
+import timeit
 from matplotlib import pyplot
 
 
@@ -36,8 +38,19 @@ if __name__ == "__main__":
                         help="xmin, xmax, ymin, ymax")
     parser.add_argument("--width", type=int, help="Width of image", default=1000)
     parser.add_argument("--height", type=int, help="Height of image", default=1000)
+    parser.add_argument("--timeit", help="Measure execution time rather than displaying the image", action="store_true")
     args = parser.parse_args()
 
-    mandelbrot = calculate_mandelbrot(args.range[0], args.range[1], args.range[2], args.range[3],
-                               args.width, args.height, args.iterations)
-    show(mandelbrot)
+    def run():
+        return calculate_mandelbrot(args.range[0], args.range[1], args.range[2], args.range[3],
+                                   args.width, args.height, args.iterations)
+
+    if args.timeit:
+        times = 10
+        print(f"running {times} times...")
+        t = timeit.Timer(run, timer=time.process_time)
+        time = t.timeit(times)
+        print(f"took {time/times} seconds per run")
+    else:
+        mandelbrot = run()
+        show(mandelbrot)

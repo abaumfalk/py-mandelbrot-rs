@@ -15,3 +15,4 @@ measured on AMD Ryzen 5 3600 6-Core Processor
 - v0.2 - use pre-allocated numpy array (rather than lists): 2,6s (slower!)
 - v0.3 - use lookup table for x/y coordinates: 2,7s (slightly slower!)
 - v0.4 - use list comprehension: 2,4s (no difference)
+- v0.5 - precalculate x/y coordinates using python lists: 2,3s (slightly faster!

@@ -1,4 +1,5 @@
 import argparse
+from matplotlib import pyplot
 
 
 def mandelbrot_iterate(c, max_iter):
@@ -24,6 +25,9 @@ def calculate_mandelbrot(x_min, x_max, y_min, y_max, width, height, iterations):
 
     return result
 
+def show(data):
+    pyplot.imshow(data, cmap="hot")
+    pyplot.show()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
@@ -36,3 +40,4 @@ if __name__ == "__main__":
 
     mandelbrot = calculate_mandelbrot(args.range[0], args.range[1], args.range[2], args.range[3],
                                args.width, args.height, args.iterations)
+    show(mandelbrot)

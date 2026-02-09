@@ -2,15 +2,7 @@ import argparse
 import time
 import timeit
 from matplotlib import pyplot
-
-
-def mandelbrot_iterate(c, max_iter):
-    z = 0
-    for i in range(max_iter):
-        z = z * z + c
-        if abs(z) > 2:
-            return i
-    return max_iter
+from py_mandelbrot_rs import mandelbrot_iterate
 
 
 def calculate_mandelbrot(x_min, x_max, y_min, y_max, width, height, iterations):
@@ -19,7 +11,7 @@ def calculate_mandelbrot(x_min, x_max, y_min, y_max, width, height, iterations):
     xs = [x_min + x * x_step for x in range(width)]
     ys = [y_min + y * y_step for y in range(height)]
 
-    return [[mandelbrot_iterate(complex(x, y), iterations)
+    return [[mandelbrot_iterate(x, y, iterations)
              for x in xs]
             for y in ys]
 
@@ -42,7 +34,7 @@ if __name__ == "__main__":
                                    args.width, args.height, args.iterations)
 
     if args.timeit:
-        times = 10
+        times = 100
         print(f"running {times} times...")
         t = timeit.Timer(run, timer=time.process_time)
         time = t.timeit(times)

@@ -17,15 +17,9 @@ def calculate_mandelbrot(x_min, x_max, y_min, y_max, width, height, iterations):
     x_step = (x_max - x_min) / width
     y_step = (y_max - y_min) / height
 
-    result = []
-    for y in range(height):
-        row = []
-        for x in range(width):
-            c = complex(x_min + x * x_step, y_min + y * y_step)
-            row.append(mandelbrot_iterate(c, iterations))
-        result.append(row)
-
-    return result
+    return [[mandelbrot_iterate(complex(x_min + x * x_step, y_min + y * y_step), iterations)
+             for x in range(width)]
+            for y in range(height)]
 
 def show(data):
     pyplot.imshow(data, cmap="hot")

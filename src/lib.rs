@@ -23,10 +23,10 @@ mod py_mandelbrot_rs {
     fn calculate_mandelbrot(x_min: f64, x_max: f64, y_min: f64, y_max: f64, width: usize, height: usize, max_iter: u32) 
             -> Vec<Vec<u32>> {
         let x_values: Vec<f64> = (0..width).map(|x| x as f64 * (x_max - x_min) / width as f64).collect();
-        let y_values :Vec<f64> = (0..height).map(|y| y as f64 * (y_max - y_min) / height as f64).collect();
+        let y_values = (0..height).map(|y| y as f64 * (y_max - y_min) / height as f64);
 
-        (0..height).map(|y| 
-            (0..width).map(|x| 
-                mandelbrot_iterate(x_values[x], y_values[y], max_iter)).collect()).collect()
+        y_values.map(|y| 
+            x_values.iter().map(|x| 
+                mandelbrot_iterate(*x, y, max_iter)).collect()).collect()
     }
 }

@@ -25,17 +25,8 @@ mod py_mandelbrot_rs {
         let x_values: Vec<f64> = (0..width).map(|x| x as f64 * (x_max - x_min) / width as f64).collect();
         let y_values :Vec<f64> = (0..height).map(|y| y as f64 * (y_max - y_min) / height as f64).collect();
 
-        let mut result = vec![vec![0; width]; height];
-
-        for y in 0..height {
-            for x in 0..width {
-                let cx = x_values[x];
-                let cy = y_values[y];
-
-                result[y][x] = mandelbrot_iterate(cx, cy, max_iter);
-            }
-        }
-
-        result
+        (0..height).map(|y| 
+            (0..width).map(|x| 
+                mandelbrot_iterate(x_values[x], y_values[y], max_iter)).collect()).collect()
     }
 }

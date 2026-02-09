@@ -7,3 +7,7 @@ This demo was inspired by a talk given at the monthly Rust Usergroup Cologne Mee
 ## HowTo
 Start the demo using uv:
 uv run main.py
+
+## Execution Time
+measured on AMD Ryzen 5 3600 6-Core Processor
+- v0.1 - initial Python-only version: 2,4s

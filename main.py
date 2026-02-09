@@ -2,7 +2,7 @@ import argparse
 import time
 import timeit
 from matplotlib import pyplot
-import numpy
+
 
 def mandelbrot_iterate(c, max_iter):
     z = 0
@@ -14,15 +14,16 @@ def mandelbrot_iterate(c, max_iter):
 
 
 def calculate_mandelbrot(x_min, x_max, y_min, y_max, width, height, iterations):
-    x_values = numpy.linspace(x_min, x_max, width)
-    y_values = numpy.linspace(y_min, y_max, height)
+    x_step = (x_max - x_min) / width
+    y_step = (y_max - y_min) / height
 
-    result = numpy.empty((height, width))
-
+    result = []
     for y in range(height):
+        row = []
         for x in range(width):
-            c = complex(x_values[x], y_values[y])
-            result[y][x] = mandelbrot_iterate(c, iterations)
+            c = complex(x_min + x * x_step, y_min + y * y_step)
+            row.append(mandelbrot_iterate(c, iterations))
+        result.append(row)
 
     return result
 

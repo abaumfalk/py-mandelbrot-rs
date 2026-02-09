@@ -11,3 +11,4 @@ uv run main.py
 ## Execution Time
 measured on AMD Ryzen 5 3600 6-Core Processor
 - v0.1 - initial Python-only version: 2,4s
+- v0.2 - use pre-allocated numpy array (rather than lists): 2,6s (slower!)

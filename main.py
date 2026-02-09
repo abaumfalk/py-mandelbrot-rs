@@ -14,14 +14,14 @@ def mandelbrot_iterate(c, max_iter):
 
 
 def calculate_mandelbrot(x_min, x_max, y_min, y_max, width, height, iterations):
-    x_step = (x_max - x_min) / width
-    y_step = (y_max - y_min) / height
+    x_values = numpy.linspace(x_min, x_max, width)
+    y_values = numpy.linspace(y_min, y_max, height)
 
     result = numpy.empty((height, width))
 
     for y in range(height):
         for x in range(width):
-            c = complex(x_min + x * x_step, y_min + y * y_step)
+            c = complex(x_values[x], y_values[y])
             result[y][x] = mandelbrot_iterate(c, iterations)
 
     return result

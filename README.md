@@ -17,3 +17,4 @@ measured on AMD Ryzen 5 3600 6-Core Processor
 - v0.4 - use list comprehension: 2,4s (no difference)
 - v0.5 - precalculate x/y coordinates using python lists: 2,3s (slightly faster!
 - v0.6 - use Rust for mandelbrot iteration: 0,1s (23x faster!)
+- v0.7 - use Rust for canvas iteration: 0,06s (1,6x faster)

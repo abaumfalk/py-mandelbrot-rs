@@ -2,18 +2,8 @@ import argparse
 import time
 import timeit
 from matplotlib import pyplot
-from py_mandelbrot_rs import mandelbrot_iterate
+from py_mandelbrot_rs import calculate_mandelbrot
 
-
-def calculate_mandelbrot(x_min, x_max, y_min, y_max, width, height, iterations):
-    x_step = (x_max - x_min) / width
-    y_step = (y_max - y_min) / height
-    xs = [x_min + x * x_step for x in range(width)]
-    ys = [y_min + y * y_step for y in range(height)]
-
-    return [[mandelbrot_iterate(x, y, iterations)
-             for x in xs]
-            for y in ys]
 
 def show(data):
     pyplot.imshow(data, cmap="hot")

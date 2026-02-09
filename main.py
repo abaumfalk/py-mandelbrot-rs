@@ -24,7 +24,7 @@ if __name__ == "__main__":
                                    args.width, args.height, args.iterations)
 
     if args.timeit:
-        times = 100
+        times = 1000
         print(f"running {times} times...")
         t = timeit.Timer(run, timer=time.process_time)
         time = t.timeit(times)

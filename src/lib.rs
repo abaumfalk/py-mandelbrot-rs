@@ -5,7 +5,8 @@ use pyo3::prelude::*;
 mod py_mandelbrot_rs {
     use pyo3::prelude::*;
     use num::Complex;
-
+    use rayon::prelude::*;
+    
     fn mandelbrot_iterate(cx: f64, cy: f64, max_iter: u32) -> u32 {
         let c = Complex::new(cx, cy);
         let mut z = Complex::new(0.0, 0.0);
@@ -33,6 +34,7 @@ mod py_mandelbrot_rs {
         let yrange = range(y_min, y_max, height);
 
         (0..height)
+            .into_par_iter() // distribute row computations between cpu cores using rayon
             .map(|y| {
                 (0..width)
                     .map(|x| {

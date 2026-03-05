@@ -32,16 +32,14 @@ mod py_mandelbrot_rs {
         let xrange = range(x_min, x_max, width);
         let yrange = range(y_min, y_max, height);
 
-        let mut result = vec![vec![0; width]; height];
-
-        for y in 0..height {
-            let cy = yrange[y];
-            for x in 0..width {
-                let cx = xrange[x];
-                result[y][x] = mandelbrot_iterate(cx, cy, max_iter);
-            }
-        }
-
-        result
+        (0..height)
+            .map(|y| {
+                (0..width)
+                    .map(|x| {
+                        mandelbrot_iterate(xrange[x], yrange[y], max_iter)
+                    })
+                    .collect()
+            })
+            .collect()
     }
 }

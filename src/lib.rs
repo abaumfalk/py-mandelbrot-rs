@@ -28,9 +28,9 @@ mod py_mandelbrot_rs {
         let mut result = vec![vec![0; width]; height];
 
         for y in 0..height {
-            let cy = y_min + y as f64 * y_step;
+            let cy = (y as f64).mul_add(y_step, y_min);
             for x in 0..width {
-                let cx = x_min + x as f64 * x_step;
+                let cx = (x as f64).mul_add(x_step, x_min);
 
                 result[y][x] = mandelbrot_iterate(cx, cy, max_iter);
             }

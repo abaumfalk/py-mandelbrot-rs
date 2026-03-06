@@ -33,6 +33,7 @@ mod py_mandelbrot_rs {
         let xrange = range(x_min, x_max, width);
         let yrange = range(y_min, y_max, height);
 
+        let mut result = Vec::with_capacity(height);
         (0..height)
             .into_par_iter() // distribute row computations between cpu cores using rayon
             .map(|y| {
@@ -42,6 +43,8 @@ mod py_mandelbrot_rs {
                     })
                     .collect()
             })
-            .collect()
+            .collect_into_vec(&mut result);
+
+        result
     }
 }
